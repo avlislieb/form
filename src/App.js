@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import FormularioCadastro from './components/FormCadastro/FormularioCadastro';
+import { Container, Typography } from "@material-ui/core";
+import { validaCpf, validaSenha } from './models/cadastro';
+import validatiosForm from './context/validacoesCadastro';
+class App extends Component {
+  render() {
+    return (
+      <Container component="article" maxWidth="sm">
+        <Typography variant="h3" component="h1" align="center" >Formulario de cadastro</Typography>
+        <validatiosForm.Provider value={{ cpf:validaCpf, senha:validaSenha }}>
+          <FormularioCadastro onSend={onSendForm} />
+        </validatiosForm.Provider>
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        {/* contexto com valores default 
+        <FormularioCadastro onSend={onSendForm} /> 
+        */}
+      </Container>
+    );
+  }
+}
+
+function onSendForm (dataForm) {
+  console.log(dataForm);  
 }
 
 export default App;
